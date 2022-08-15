@@ -33,8 +33,6 @@ router.put('/:id',async (req,res)=>{
 router.get('/:id',async (req,res)=>{
     try{
         const recipe=await Recipe.findById(req.params.id);
-        console.log(req.params.id);
-        console.log(recipe);
         res.status(200).send(recipe);    
     } 
     catch(err){
@@ -79,7 +77,7 @@ router.get("/getall/:username",async(req,res)=>{
 // get all recipes
 router.get("/suggest/all",async(req,res)=>{
     try{
-        const userRecipes = await Recipe.find().limit(8);
+        const userRecipes = await Recipe.find();
         res.status(200).send(userRecipes);
     }
     catch(err){
@@ -92,7 +90,6 @@ router.get("/suggest/all",async(req,res)=>{
 router.get("/search/:val",async(req,res)=>{
     try{
         const val=req.params.val;
-        console.log(val);
         const Recipes = await Recipe.find({$or:[{ 'recipename': {$regex: ".*" + val + ".*", $options:'i'} },{'ingridients':{$regex: ".*" + val + ".*", $options:'i'}}]});
         res.status(200).send(Recipes);
     }
