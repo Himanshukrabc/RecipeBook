@@ -16,7 +16,7 @@ router.post('/create',async (req,res)=>{
 });
 
 // update a recipe
-router.put('/:id',async (req,res)=>{
+router.put('/get/:id',async (req,res)=>{
     try{
         const recipe=await Recipe.findById(req.params.id);
         // console.log(recipe.userid,req.params.id);
@@ -30,7 +30,7 @@ router.put('/:id',async (req,res)=>{
 });
 
 // get a recipe
-router.get('/:id',async (req,res)=>{
+router.get('/get/:id',async (req,res)=>{
     try{
         const recipe=await Recipe.findById(req.params.id);
         res.status(200).send(recipe);    
@@ -42,7 +42,7 @@ router.get('/:id',async (req,res)=>{
 });
 
 // delete a recipe
-router.delete('/:id',async (req,res)=>{
+router.delete('/get/:id',async (req,res)=>{
     try{
         const recipe=await Recipe.findById(req.params.id);
         // console.log(recipe.userid,req.params.id);
@@ -70,7 +70,7 @@ router.get("/getall/:username",async(req,res)=>{
     }
     catch(err){
         console.log(err);
-        res.status(403).send(err);
+        res.status(403).send(err);  
     }
 });
 
