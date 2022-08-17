@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import React, { useRef } from 'react'
 import './Register.css';
-import axios from 'axios';
+import { axiosInstance } from '../../config';
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 export default function Register() {
@@ -22,7 +22,7 @@ export default function Register() {
                 password:password.current.value,
             }
             try{
-                await axios.post("auth/register",user);
+                await axiosInstance.post("auth/register",user);
                 navigate("/login");
             }
             catch(err){

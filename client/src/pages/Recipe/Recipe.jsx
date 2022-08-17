@@ -9,7 +9,7 @@ import IngridientList from '../../components/IngridientList/IngridientList';
 import DirectionsList from '../../components/DirectionsList/DirectionsList';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect } from 'react';
-import axios from 'axios';
+import { axiosInstance } from '../../config';
 const curuser=JSON.parse(sessionStorage.getItem('user'));
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -26,7 +26,7 @@ function Recipe() {
   useEffect(() => {
     try{
       const getrecipe=async ()=>{
-        const recipe=await axios.get(`/recipe/${recipeid}`);
+        const recipe=await axiosInstance.get(`/recipe/get/${recipeid}`);
         if(recipe.data.username===curuser.username){
           setdisabled("enabled");
         }
@@ -43,14 +43,14 @@ function Recipe() {
     }
   }, [recipeid]);
   const db_update_ing = async(arr)=>{
-    await axios.put(`/recipe/${recipeid}`,{"ingridients":arr});
+    await axiosInstance.put(`/recipe/get/${recipeid}`,{"ingridients":arr});
   }
   const updateing = (arr)=>{
     seting(arr);
     db_update_ing(arr);
   }
   const db_update_dir = async(arr)=>{
-    await axios.put(`/recipe/${recipeid}`,{"directions":arr});
+    await axiosInstance.put(`/recipe/get/${recipeid}`,{"directions":arr});
   }
   const updatedir = (arr)=>{
     setdir(arr);

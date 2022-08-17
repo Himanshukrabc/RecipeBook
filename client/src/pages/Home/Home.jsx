@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Home.css'
 import Header from '../../components/Header/Header';
 import Tile from '../../components/Tile/Tile';
-import axios from 'axios';
+import { axiosInstance } from '../../config';
 import { NavLink } from 'react-router-dom';
 const curuser=JSON.parse(sessionStorage.getItem("user"));
 
@@ -14,9 +14,9 @@ function Home(){
 
   useEffect(() => {
     const fetchrecipe = async()=>{
-      const userRecipe = await axios.get(`/recipe/getall/${username}`);
+      const userRecipe = await axiosInstance.get(`recipe/getall/${username}`);
       setUserRecipes(userRecipe.data);
-      const suggestions = await axios.get(`/recipe/suggest/all`);
+      const suggestions = await axiosInstance.get(`recipe/suggest/all`);
       setSuggestions(suggestions.data);
     };
     fetchrecipe();
